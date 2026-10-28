@@ -8,6 +8,9 @@ const reports = uniqueById(raw).filter(r => r.mergedInto === 4471);
 const tenants = fs.readdirSync('src/lib/data/tenants').map(f => read(`src/lib/data/tenants/${f}`));
 const tenantOf = r => tenants.find(t => t.handle === r.tenant);
 const notes = read('src/lib/data/desk-notes.json');
+const review = fs.readFileSync('src/routes/kb/incidents/4471-review/+page.svx', 'utf8');
+const signature = review.match(/^signature: '([^']+)'/m)?.[1];
+if (!signature) throw new Error('Review frontmatter signature is missing');
 const groups = groupByCause(reports, tenantOf);
 const weeks = new Map();
 const start = Date.parse('2026-03-30');
@@ -26,8 +29,8 @@ const result = {
   rawRows: raw.length,
   uniqueReports: reports.length,
   repeatedRows: raw.length - uniqueById(raw).length,
-  signature: 'Mateusz Jakowlew / Codex / S01E03',
-  deskRef: deskRef('Mateusz Jakowlew / Codex / S01E03'),
+  author: 'Mateusz Jakowlew / Codex / S01E03',
+  deskRef: deskRef(signature),
   groups: groups.map(({ reports: rs, ...g }) => ({
     ...g,
     count: rs.length,

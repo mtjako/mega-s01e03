@@ -4,7 +4,7 @@ title: '#4471 review · two causes behind the date reports'
 owner: Mateusz Jakowlew
 status: closed
 reviewed: 2026-10-28
-signature: 'Mateusz Jakowlew / Codex / S01E03'
+signature: 'v1.eyJzdWIiOiI1MTEiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzE2OTYxNCwiZXhwIjoxNzkzMjU2MDE0fQ._Q-BN8YIbEAkRBQKUxpNnsegBw4QgwYJ_WoxCVlSOOI'
 ---
 
 <script>
@@ -111,6 +111,7 @@ booking-specific rules must not silently classify reports for every other produc
 
 The GitHub issues for this review are indexed in `deliverables/issues.json` after publication.
 The accepted decision 0001 remains unchanged as the historical record.
+
 
 
 

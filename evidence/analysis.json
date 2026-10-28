@@ -3,8 +3,8 @@
   "rawRows": 427,
   "uniqueReports": 412,
   "repeatedRows": 15,
-  "signature": "Mateusz Jakowlew / Codex / S01E03",
-  "deskRef": "DR-8F0T-WSVV",
+  "author": "Mateusz Jakowlew / Codex / S01E03",
+  "deskRef": "DR-73J4-ZHKA",
   "groups": [
     {
       "cause": "parser",
