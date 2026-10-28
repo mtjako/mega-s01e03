@@ -1,5 +1,17 @@
 # kb — the support knowledge base
 
+## S01E03 deliverables · #4471 review
+
+- [Signed kb page (.svx)](src/routes/kb/incidents/4471-review/+page.svx)
+- [Rendered kb page (self-contained HTML)](rendered/incidents-4471-review.html)
+- [Download the rendered page to open in a browser](https://raw.githubusercontent.com/mtjako/mega-s01e03/main/rendered/incidents-4471-review.html)
+- [Parser issue · 379 reports · fixed](https://github.com/mtjako/mega-s01e03/issues/1)
+- [Hint issue · 33 reports · won't fix: form retired](https://github.com/mtjako/mega-s01e03/issues/2)
+
+The source and rendered page are the same signed review. The HTML contains the computed
+cause table, receipt/merge timeline and desk reference. Download it and open it locally;
+GitHub's file viewer shows HTML source rather than displaying the page.
+
 **kb** = knowledge base. What the support desk knows about how our products break, written
 down where the code can keep it honest.
 
