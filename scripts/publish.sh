@@ -9,6 +9,12 @@ if [[ ! "$repo" =~ ^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$ ]]; then
 fi
 
 gh auth status
+protocol="$(gh config get git_protocol --host github.com)"
+case "$protocol" in
+  ssh) remote_url="git@github.com:$repo.git" ;;
+  https) remote_url="https://github.com/$repo.git" ;;
+  *) echo "Unsupported Git protocol: $protocol" >&2; exit 1 ;;
+esac
 actor="$(gh api user --jq .login)"
 if [[ "${repo%%/*}" != "$actor" ]]; then
   echo "Use a repository in your own account ($actor)." >&2
@@ -45,8 +51,9 @@ if git remote get-url origin >/dev/null 2>&1; then
     echo 'Existing origin differs from selected repo; stopping without changing it.' >&2
     exit 1
   fi
+  git remote set-url origin "$remote_url"
 else
-  git remote add origin "https://github.com/$repo.git"
+  git remote add origin "$remote_url"
 fi
 git add README.md .gitignore package.json package-lock.json svelte.config.js vite.config.js src scripts evidence deliverables rendered
 if ! git diff --cached --quiet; then
