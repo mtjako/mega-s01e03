@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 review · two causes behind the date reports'
 owner: Mateusz Jakowlew
-status: reviewed
+status: closed
 reviewed: 2026-10-28
 signature: 'Mateusz Jakowlew / Codex / S01E03'
 ---
@@ -13,6 +13,21 @@ signature: 'Mateusz Jakowlew / Codex / S01E03'
   import DedupeExplorer from '#lib/kb/DedupeExplorer.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
 </script>
+
+## Engineering outcome · 5 October 2026
+
+After the initial tickets were accepted, the [course desk update](https://hq.mega.dev/challenges/what-it-shows)
+reported that **#4471 closed on 5 October**:
+
+- **Parser: FIXED** — `fix(dates): parse dd/mm for eu locales`. Close its GitHub issue as completed.
+- **Hint: WON'T FIX** — `booking-v3 form retired`. Close its GitHub issue as not planned.
+
+These are different outcomes: retirement removes the form from service; it does not mean
+its date hint was repaired. This update was observed on 28 October, after reviewing the
+4 October export. The counts and chart below remain historical evidence from that export.
+Production fixes were not independently tested; the desk update is the source for closure.
+
+## Findings from the export
 
 The [original incident](/kb/incidents/4471) says that every report is the same parser bug.
 The rendered evidence shows two causes. Track the shared parser and the booking-v3 date hint
@@ -96,6 +111,7 @@ booking-specific rules must not silently classify reports for every other produc
 
 The GitHub issues for this review are indexed in `deliverables/issues.json` after publication.
 The accepted decision 0001 remains unchanged as the historical record.
+
 
 
 <!-- published-issues:start -->

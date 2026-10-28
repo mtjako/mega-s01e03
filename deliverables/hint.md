@@ -1,3 +1,7 @@
+## Engineering update — 2026-10-05
+
+The course desk marks #4471 closed. This cause is **WON'T FIX**: booking-v3 form retired. Close this issue as **not planned**. Source: https://hq.mega.dev/challenges/what-it-shows (observed 2026-10-28). This records the desk's outcome; no independent production verification was available.
+
 ## Problem
 
 Booking-v3 prints MM/DD/YYYY, while its form reads dates using the day-first tenant convention. People follow the hint and their dates swap. This needs an independent form fix.

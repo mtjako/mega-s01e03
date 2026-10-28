@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import './analyze.mjs';
 
 const analysis = JSON.parse(fs.readFileSync('evidence/analysis.json', 'utf8'));
+const resolution = JSON.parse(fs.readFileSync('src/lib/data/resolution-4471.json', 'utf8'));
 fs.mkdirSync('deliverables', { recursive: true });
 const definitions = {
   parser: {
@@ -25,7 +26,9 @@ const issues = analysis.groups.map(g => {
   const d = definitions[g.cause];
   if (!d) throw new Error(`Unclassified cause: ${g.cause}; investigate before publishing`);
   const body = `## Problem\n\n${d.description}\n\n## Reports covered\n\n**${g.count} distinct reports** merged into #4471 in the 2026-10-04 export. First received ${g.firstSeen}; last received ${g.lastSeen}; ${g.tenants} tenants.\n\nThe export has ${analysis.rawRows} rows but only ${analysis.uniqueReports} report IDs. Counts deduplicate by ID and use tenant locale, form version and channel through src/lib/kb/causes.ts and locales.ts. Intake labels are guesses: ${Object.entries(g.taggedAs).map(([tag,n])=>`${tag}: ${n}`).join('; ')}.\n\n## Evidence and reproduction\n\n${d.evidence}\n\n${d.reproduction}\n\nThis reproduction is derived from the exported code and reports. The production application was not available for direct testing.\n\n## Fix and acceptance\n\n${d.fix}\n\n## Limits and follow-up\n\n${d.caveat}\n\nThe desk keeps receiving reports. These are snapshot counts, not live totals. Re-export, deduplicate and reclassify before closing or quoting a current count. Receipt time differs from merge time: early April reports were merged in July.\n\nSee src/routes/kb/incidents/4471-review/+page.svx, its generated rendered/incidents-4471-review.html, and evidence/analysis.json for the signed review, component output and full report-ID membership.\n\n## Report IDs\n\n${g.reportIds.join(', ')}\n`;
-  fs.writeFileSync(`deliverables/${g.cause}.md`, body);
+  const outcome = resolution[g.cause];
+  const closure = `## Engineering update — ${resolution.closedOn}\n\nThe course desk marks #4471 closed. This cause is **${outcome.status}**: ${outcome.message}. Close this issue as **${outcome.githubReason}**. Source: ${resolution.source} (observed ${resolution.observedOn}). This records the desk's outcome; no independent production verification was available.\n\n`;
+  fs.writeFileSync(`deliverables/${g.cause}.md`, closure + body);
   return { cause: g.cause, title: d.title, reports: g.count, bodyFile: `deliverables/${g.cause}.md` };
 });
 fs.writeFileSync('deliverables/issue-drafts.json', JSON.stringify(issues, null, 2) + '\n');

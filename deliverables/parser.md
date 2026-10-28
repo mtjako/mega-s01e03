@@ -1,3 +1,7 @@
+## Engineering update — 2026-10-05
+
+The course desk marks #4471 closed. This cause is **FIXED**: fix(dates): parse dd/mm for eu locales. Close this issue as **completed**. Source: https://hq.mega.dev/challenges/what-it-shows (observed 2026-10-28). This records the desk's outcome; no independent production verification was available.
+
 ## Problem
 
 The shared date parser reads every date month first, even for tenants whose locale uses day first. Keep this separate from the booking-v3 hint defect.
