@@ -1,0 +1,14 @@
+[
+  {
+    "cause": "parser",
+    "title": "S01E03: shared parser swaps day and month for day-first tenants",
+    "reports": 379,
+    "bodyFile": "deliverables/parser.md"
+  },
+  {
+    "cause": "hint",
+    "title": "S01E03: booking-v3 shows MM/DD/YYYY to day-first tenants",
+    "reports": 33,
+    "bodyFile": "deliverables/hint.md"
+  }
+]

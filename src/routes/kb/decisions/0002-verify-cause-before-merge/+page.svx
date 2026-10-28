@@ -1,0 +1,43 @@
+---
+layout: runbook
+title: '0002 · Verify the cause before merging reports'
+owner: Mateusz Jakowlew
+status: accepted
+reviewed: 2026-10-28
+signature: 'Mateusz Jakowlew / Codex / S01E03'
+---
+
+<script>
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+</script>
+
+**Date:** 28 October 2026 · **Signed by:** Mateusz Jakowlew / Codex
+
+**Supersedes:** [0001](/kb/decisions/0001-dedupe-by-subject).
+The earlier accepted record is preserved unchanged.
+
+## Context
+
+The review of #4471 finds distinct parser and booking-v3 hint causes inside one ticket.
+Subject matching hides this difference; browser-derived intake tags also disagree with
+the tenant-based evidence. The desk handles multiple products, so a booking classifier
+cannot become a universal rule.
+
+## Decision
+
+Use subject similarity to find candidates, then read each report. Verify the product and
+the observed behavior, look up its tenant and configuration, and compare evidence for the
+cause. For these date reports, inspect tenant locale, channel, form version and the actual
+input/output dates. Merge only when the evidence supports the same cause. Give distinct
+causes separate tickets, and retain uncertain reports for investigation.
+
+Count distinct report IDs. Attach intake labels as context, not proof. Read received and
+merged timestamps separately. Rebuild from a current export when the queue changes.
+
+## Consequences
+
+Triage takes more reading. Engineering receives independently actionable problems with
+auditable counts. Ambiguous reports stay visible. Each product needs its own evidence;
+the booking-specific classifier is a helper, not a universal diagnosis.
+
+<RenderStamp {signature} />
